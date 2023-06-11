@@ -20,11 +20,17 @@ const Login = (props) => {
             //Save the Auth Token and Redirect
             localStorage.setItem('token', json.authtoken);
             props.showAlert("LoggedIn Successfully", "success");
-            navigate("/");
+            navigate("/");   
         }
         else{
             props.showAlert("Invalid Credentials", "danger");
-        }
+        }   
+        const interval = setInterval(()=>{
+          console.log("Logout")
+          localStorage.removeItem('token');
+          navigate('/login')
+          clearInterval(interval);
+        },5000);
     }
 
     const onChange = (e)=>{
