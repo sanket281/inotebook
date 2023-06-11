@@ -16,3 +16,35 @@ i{
   cursor: pointer;
   
 }
+
+body{
+  /* background-color: rgb(115, 115, 226); */
+  background-color: #eeee;
+  overflow-y: scroll;
+}
+
+
+#addnoteContainer{
+  background-color: white;
+  height: 0px;
+  overflow: hidden;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #d8d7d7;
+  margin-left: auto;
+  margin-right: auto;
+  /* display: none; */
+  background-color: rgb(255 255 255);
+  transition: height 1s ease-out;
+}
+
+#addnoteContainer form{
+  padding: 1rem;
+}
+#addnoteContainer h1{
+  padding: 1rem;
+}
+
+hr{
+  box-shadow: 1px 1px 1px black
+}
