@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import NoteContext from "./noteContext";
 
 
@@ -6,6 +6,13 @@ const NoteState = (props) =>{
     const host = "http://localhost:5000"
     const notesInitial = []
     const [notes, setNotes] = useState(notesInitial)
+    const [filteredNotes, setFilteredNotes] = useState(notesInitial);
+    const [tags, setTags] = useState([]);
+    
+
+    useEffect(() => {
+        setTags([...new Set(notes.map((note) => note.tag))]);
+      }, [notes]);
 
    //Get all notes
       const getNotes = async ()=>{
@@ -19,7 +26,8 @@ const NoteState = (props) =>{
        });
        const json = await response.json()
        console.log(json)
-       setNotes(json)
+       setNotes(json);
+       setFilteredNotes(json);
    }
    
     //Add a Note
@@ -85,8 +93,22 @@ const NoteState = (props) =>{
         setNotes(newNotes);
     }
 
+    //Filter notes by tag
+    const filterNoteByTag = (tag) =>{
+        const filtered = notes.filter((note)=>note.tag === tag);
+        if(tag === 'All'){
+            setFilteredNotes(notes);
+        }
+        else{
+            setFilteredNotes(filtered);
+            setTags([...new Set(notes.map((note) => note.tag))]);
+        }
+        //Update the tags state based on the filtered notes
+        
+    }
+
     return(
-        <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes}}>
+        <NoteContext.Provider value={{notes, filteredNotes, addNote, deleteNote, editNote, getNotes, filterNoteByTag, tags}}>
             {props.children}
         </NoteContext.Provider>
     )
