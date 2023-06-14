@@ -43,6 +43,7 @@ const NoteState = (props) =>{
         });
         const note = await response.json();
         setNotes(notes.concat(note))
+        setFilteredNotes([...notes, note]);
         
     }
 
@@ -63,6 +64,7 @@ const NoteState = (props) =>{
        
         const newNotes = notes.filter((note)=>{return  note._id!==id})
         setNotes(newNotes)
+        setFilteredNotes(newNotes)
     }
 
     //Edit a note
@@ -91,6 +93,7 @@ const NoteState = (props) =>{
             }
         }
         setNotes(newNotes);
+        setFilteredNotes(newNotes)
     }
 
     //Filter notes by tag
