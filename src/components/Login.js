@@ -33,12 +33,14 @@ const Login = (props) => {
     } else {
       props.showAlert("Invalid Credentials", "danger");
     }
-    // const interval = setInterval(()=>{
-    //   console.log("Logout")
-    //   localStorage.removeItem('token');
-    //   navigate('/login')
-    //   clearInterval(interval);
-    // },5000);
+
+    //automatic log out after half hour
+    const interval = setInterval(()=>{
+      console.log("Logout")
+      localStorage.removeItem('token');
+      navigate('/login')
+      clearInterval(interval);
+    },180000);
   };
 
   const onChange = (e) => {
